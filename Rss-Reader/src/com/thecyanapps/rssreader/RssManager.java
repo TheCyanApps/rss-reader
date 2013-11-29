@@ -9,7 +9,6 @@ import com.thecyanapps.rssreader.interfaces.OnRssErrorListener;
 public class RssManager{
 	
 	private static RssManager manager;
-	protected Dialog dialog;
 	protected boolean isLoaded;
 	protected OnRssDownloadStartedListener mOnRssDownloadStartedListener;
 	protected OnRssDownloadedListener mOnRssDownloadedListener;
@@ -38,16 +37,7 @@ public class RssManager{
 	 */
 	public void downloadRss(String url){
 		RssAsyncTask rat = new RssAsyncTask(url);
-		if(dialog!=null) dialog.show();
 		rat.execute();
-	}
-	
-	/**
-	 * Sets the dialog to display when the rss is beign downloaded.
-	 * @param dialog The dialog that will show.
-	 */
-	public void setDownloadingDialog(Dialog dialog){
-		this.dialog = dialog;
 	}
 	
 	/**

@@ -15,22 +15,24 @@ public class RssHandler extends HandlerBase{
 	boolean isItem = false;
 	String title, url, desc, cont,creator;
 	
-	public RssHandler(){
-		this.list = new ArrayList<RssObject>();
+	public RssHandler(ArrayList<RssObject> list){
+		this.list = list;
 	}
 	
 	@Override
 	public void startDocument() throws SAXException {
 		RssManager.getInstance().isLoaded = false;
-		RssManager.getInstance().mOnRssDownloadStartedListener.onDownloadStarted();
+		try{
+			RssManager.getInstance().mOnRssDownloadStartedListener.onDownloadStarted();
+		}catch(Exception e){
+			e.printStackTrace();
+		}
 		super.startDocument();
 	}
 	
 	@Override
 	public void endDocument() throws SAXException {
 		RssManager.getInstance().isLoaded = true;
-		if(RssManager.getInstance().dialog!=null) RssManager.getInstance().dialog.dismiss();
-		RssManager.getInstance().mOnRssDownloadedListener.onRssDownloaded(list);
 		super.endDocument();
 	}
 	
